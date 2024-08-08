@@ -1,0 +1,1515 @@
+
+<!DOCTYPE html>
+<html lang="en" data-ng-app="foodmandu_app" class="ng-cloak">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    Foodmandu: Food Delivery Service in Kathmandu, Pokhara, Chitwan
+  </title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+
+  <style type="text/css">
+    [ng\:cloak],
+    [ng-cloak],
+    [data-ng-cloak],
+    [x-ng-cloak],
+    .ng-cloak,
+    .x-ng-cloak {
+      display: none !important;
+    }
+
+    .addItemParent {
+      position: fixed;
+      bottom: 2rem;
+      left: 2rem;
+      opacity: 0.5;
+    }
+
+    .addItemParent:hover {
+      opacity: 1;
+    }
+
+
+    .addItemText {
+      margin: 0;
+      color: #fff;
+      position: relative;
+      top: 5px;
+      align-content: center;
+      font-size: 15px;
+    }
+
+    input.error,
+    textarea.error {
+      border: 1px solid #9F1D22;
+    }
+
+    .typeahead .custom-popup-wrapper {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      z-index: 1000;
+      display: none;
+      background-color: #f9f9f9;
+    }
+
+    .typeahead .custom-popup-wrapper>.message {
+      padding: 10px 20px;
+      border-bottom: 1px solid #ddd;
+      color: #868686;
+    }
+
+    .typeahead .custom-popup-wrapper>.dropdown-menu {
+      position: static;
+      float: none;
+      display: block;
+      min-width: 160px;
+      background-color: transparent;
+      border: none;
+      border-radius: 0;
+      box-shadow: none;
+      display: block;
+      padding: .5rem .75rem;
+      clear: both;
+      color: #333;
+      text-decoration: none;
+    }
+
+
+    .dropdown-menu :hover {
+      background-color: lightgray;
+      color: #9F1D22;
+    }
+
+    .dropdown-menu {
+      font-size: 14px;
+      text-transform: capitalize;
+      padding: 10px;
+      width: 339px;
+    }
+
+    /*.loadinggif {
+			background: url('https://www.hsi.com.hk/HSI-Net/pages/images/en/share/ajax-loader.gif') no-repeat right center;
+		}*/
+
+
+
+
+    .dropdown-menu span {
+      cursor: pointer;
+    }
+
+    .typeahead-demo .custom-popup-wrapper>.dropdown-menu {
+      position: static;
+      float: none;
+      display: block;
+      min-width: 160px;
+      border: none;
+      border-radius: 0;
+      box-shadow: 1px 1px 1px 1px #868686;
+    }
+
+    .clearSearch1 {
+      position: relative;
+      cursor: pointer;
+      float: right;
+      margin-right: -50px;
+      margin-top: -25px;
+    }
+
+    .clearSearch2 {
+      float: right;
+      margin-right: 30px;
+      margin-top: -26px;
+      padding: 1px;
+      cursor: pointer;
+    }
+  </style>
+
+
+  <style>
+    .dropdown-menu,
+    .uib-typeahead-match {
+      width: 100%;
+    }
+
+    /*.banner{
+			background-size:auto !important;
+		}*/
+    /*.loadinggif {
+		background: url('http://www.hsi.com.hk/HSI-Net/pages/images/en/share/ajax-loader.gif') no-repeat right center;
+	}*/
+
+    .clearSearch {
+      position: relative;
+      z-index: 100;
+      top: 30%;
+      margin-left: -20px;
+      cursor: pointer;
+    }
+
+    .dropdown-menu>li>a {
+      display: block;
+      padding: 3px 20px;
+      clear: both;
+      font-weight: 400;
+      line-height: 1.42857143;
+      color: #333;
+      white-space: nowrap;
+    }
+
+    .typeahead-demo .custom-popup-wrapper {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      z-index: 1000;
+      display: none;
+      background-color: #f9f9f9;
+    }
+
+    .btn-fmd {
+      background: #94181b;
+      color: #fff;
+      margin-left: 10%;
+      font-weight: 700;
+    }
+
+    .typeahead-demo .custom-popup-wrapper>.message {
+      padding: 10px 20px;
+      border-bottom: 1px solid #ddd;
+      color: #868686;
+    }
+
+    .typeahead-demo .custom-popup-wrapper>.dropdown-menu {
+      position: static;
+      float: none;
+      display: block;
+      min-width: 160px;
+      background-color: transparent;
+      border: none;
+      border-radius: 0;
+      box-shadow: none;
+    }
+  </style>
+
+  <style>
+    /* subscribe */
+
+    .subscribe-body {
+      background: #fff;
+      padding: 30px;
+      position: relative;
+      z-index: 1;
+      margin-top: 10%;
+      text-align: left;
+      box-shadow: 0px 0 50px -20px #000;
+    }
+
+    .subscribe-body .slack-message {
+      box-shadow: none;
+      border-radius: 0;
+
+    }
+
+    .subscribe-body .slack-message img {
+      height: 500px;
+      border: 1px solid #ddd;
+    }
+
+    /*.subscribe-body .form-control {
+				height: 140px;
+				border: 1px solid #ddd;
+				box-shadow: none;
+				border-radius: 0;
+			}
+
+			.subscribe-body .btn {
+				padding: 10px 11px;
+				background: #94181b;
+				border: none;
+				color: #fff;
+				border-radius: 0;
+				margin-top: 20px;
+			}
+
+			.subscribe-body .btn:hover {
+				background: #1f415a;
+			}*/
+    .subscribe button#btn_show {
+      background: #94181b;
+      color: #fff;
+      border-radius: 5px 5px 0 0px;
+      position: fixed;
+      right: -70px;
+      top: 45%;
+      -ms-transform: rotate(-90deg);
+      -webkit-transform: rotate(-90deg);
+      transform: rotate(-90deg);
+      border: none;
+      padding: 10px 20px;
+      font-weight: 700;
+    }
+
+    .subscribe button#btn_show:hover {
+      background: #d83e3e;
+    }
+
+    .subscribe {
+      position: fixed;
+      z-index: 9999999999999;
+      top: 5%;
+      right: 0;
+    }
+
+    span#btn_hide {
+      display: block;
+      text-align: right;
+      position: absolute;
+      right: 10px;
+      top: 10px;
+    }
+
+    span#btn_hide:hover {
+      cursor: pointer;
+    }
+
+    .subscribe .form-group {
+      margin-bottom: 0;
+    }
+
+    .subscribe-body p {
+      margin-bottom: 15px;
+    }
+
+    span#btn_hide i {
+      border-radius: 50%;
+      box-shadow: none;
+      border: none;
+      background-color: #94181b;
+      margin-bottom: 10px;
+      height: 20px;
+      width: 20px;
+      line-height: 2;
+      color: #fff;
+      text-align: center;
+      vertical-align: middle;
+      font-size: 10px;
+    }
+  </style>
+
+
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async="" src="js/fbevents.js"></script>
+  <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-18855741-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() { dataLayer.push(arguments); } gtag('js', new Date());
+    gtag('config', 'UA-18855741-1');
+  </script>
+
+
+  <!-- Google tag (gtag.js) -->
+  <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-VLEGFS1WMC"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-VLEGFS1WMC');
+  </script>
+
+  <!-- Facebook Pixel Code -->
+  <script>
+    ! function(f, b, e, v, n, t, s) {
+      if (f.fbq) return;
+      n = f.fbq = function() {
+        n.callMethod ?
+          n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+      };
+      if (!f._fbq) f._fbq = n;
+      n.push = n;
+      n.loaded = !0;
+      n.version = '2.0';
+      n.queue = [];
+      t = b.createElement(e);
+      t.async = !0;
+      t.src = v;
+      s = b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t, s)
+    }(window, document, 'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '308059273968291');
+    fbq('track', 'PageView');
+  </script>
+  <noscript>
+    <img height="1" width="1" src="https://www.facebook.com/tr?id=904447423410664&ev=PageView
+&noscript=1" />
+  </noscript>
+  <!-- End Facebook Pixel Code -->
+
+</head>
+
+<body>
+
+  <header class="header" ng-controller="mobilePopupController">
+    <div class="bg-success" ng-show="showMobilePopup">
+      <a href="javascript:;" ng-click="showMobilePopup=false" style="float:right;"><i class="glyphicon icon-close"></i></a>
+      <br>
+      <div class="text-center">
+        <h5 style="color:white">
+          For better user experience, please download our mobile App.
+        </h5>
+
+        <a href="https://foodmandu.app.link/81odath7Y6">
+          <label class="btn btn--hollow" style="background-color:white;">
+            DOWNLOAD NOW
+          </label>
+        </a>
+
+      </div>
+    </div><!-- modal-container -->
+    <div class="container" data-ng-controller="ProductTopController">
+      <div class="row">
+        <div class="col-md-3 col-4 header__logo">
+          <a href="/" class="site-logo"><img src="images/logo-n.png" alt="Foodmandu"></a>
+        </div>
+
+        <div class="list-inline col-md-6 hidden-sm-down">
+
+          <div class="list-inline-item col-sm-7" ng-show="!is_index">
+            <input type="search" ng-model="fm_filter.search_text" name="q" placeholder="Restaurant name or cuisine" style="width:339px;height:35px;" autocomplete="off" class="form-control small">
+            <span class="icon-close red clearSearch1" ng-show="fm_filter.search_text" ng-hide="!fm_filter.searchtext" ng-click="fm_filter.search_text=''"></span>
+
+            <!--autosuggest part-->
+
+            <!--autosuggest part-->
+
+
+
+          </div>
+
+          <a class="btn btn--primary hidden-sm-down list-inline-item col-sm-4 text-white" ng-show="!is_index" ng-click="SearchBy()" style="float:right;height:35px;">Find Restaurants</a>
+        </div>
+
+        <div class="col-8 offset-md-5 offset-lg-0 col-md-4 col-lg-3 header__right-menu">
+          <ul class="list-inline float-right">
+            <li class="list-inline-item hidden-md-up mr-0"><span class="icomoon icon-search"></span></li>
+
+            <li class="list-inline-item"><button class="btn btn--hollow hidden-sm-down" ng-click="OpenLoginForm()">Login</button></li>
+            <li class="list-inline-item"><button class="btn btn--hollow hidden-md-up hidden-lg-up" ng-click="OpenLoginForm()">Login</button></li>
+          </ul>
+
+          <div class="header__search-dropdown hidden-md-up display-none">
+            <div class="container">
+              <div class="row">
+                <div class="col-12">
+                  <div class="search search--navbar my-2 my-md-0">
+                    <input type="text" ng-model="fm_filter.search_text" name="q" placeholder="Restaurant name or cuisine" ng-keyup="LoadAutoSuggest()" autocomplete="off" role="menu" typeahead-on-select="setPcode($item)" ng-class="autoloading?'form-control small':'form-control small '" uib-typeahead="data.DisplayText for data in suggests | filter:{DisplayText:$viewValue}" typeahead-template-url="customTemplate.html" typeahead-min-length="0">
+                    <span class="icon-close red clearSearch2" ng-show="fm_filter.search_text" ng-hide="!fm_filter.searchtext" ng-click="fm_filter.search_text=''"></span>
+
+
+
+
+                    <button class="inline-button" ng-click="SearchBy()" ng-hide="autoloading">
+                      <span class="icomoon icon-search"></span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/ng-template" id="Foodmandu_Login">
+      <div class="container">
+	<div class="row">
+		<div class="col-md-5 login__bg" style="background-image: url('/img/item-img.png');">
+
+		</div>
+		<div class="col-md-7 login__form-container">
+			<div class="modal-action modal-action--cancel" data-ng-click="cancelEditing()">×</div>
+			<div class="modal-header">
+				<div class="row">
+					<div class="col-md-12">
+						<h3 class="modal-title mb-2" id="modal-title">Login to Foodmandu</h3>
+					</div>
+				</div>
+			</div><!-- .modal-header -->
+
+			<div class="modal-body mt-3" id="modal-body">
+<form action="/Account/Login" class="login-form margin-clear" method="post" name="loginform" returnUrl="/" role="form"><input name="__RequestVerificationToken" type="hidden" value="e3UQlxiR-6rr06lXlz9Xf1Bvufq_13a4lLxFCcsLX8gUkoOEG6aq66PrbA2fP3OujwApFVRm1sp2vRvpaTOvMJ5viMs1" />					<input type="text" name="returnUrl" value="/" hidden />
+						<div class="row">
+							<div class="form-group col-sm-12">
+								<label class="small-title">Email Address</label>
+								<input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"  ng-class="{'form-control error': (loginform.Email.$error.required&&loginform.Email.$touched)||loginform.$submitted, 'form-control':Email!=''}" ng-model="Email" placeholder="you@yourname.com" name="Email" required>
+								
+							</div>
+							<div class="form-group col-sm-12">
+								<label class="small-title">Enter Password</label>
+								<input type="password" class="form-control" ng-class="{'form-control error': (loginform.Password.$error.required&&loginform.Password.$touched)||loginform.$submitted, 'form-control': Password!=''}" ng-model="Password" placeholder="" name="Password" required>
+								
+							</div>
+							<div class="col-sm-12">
+								<input type="checkbox" value="true" name="RememberMe" id="agreement">
+								
+								<label for="agreement">
+									Remember Me
+								</label>
+								<input type="hidden" value="false" name="RememberMe" />
+							</div>
+							<div class="col-sm-12">
+								<button type="submit" class="btn btn--primary btn-block">Login</button>
+							</div>
+						</div>
+					<hr>
+</form>			
+<form action="/Account/ExternalLogin" id="externalLoginForm" method="post"><input name="__RequestVerificationToken" type="hidden" value="SMUOIx7037eieUoVMA-iT6nnVdEx_SBqH-8uJrbCF3PQMOiomiTmyX6Q-kzmcr9ZzawziOmokay3LgVRTMQVlElENUA1" />						<div class="login__other-options row">
+							<div class="col-md-12 text-center small-title mb-3 mt-3">Or Login Using</div>
+										<div class="col-6">
+											<div class="btn btn--facebook btn-block mb-3 mb-md-0"><a href="javascript:document.getElementById('btnFacebook').click()" style="color:#fff;">Facebook</a></div>
+											<button class="display-none" id="btnFacebook" name="provider" value="Facebook"></button>
+										</div>
+										<div class="col-6">
+											<div class="btn btn--googleplus btn-block mb-3 mb-md-0"><a href="javascript:document.getElementById('btnGoogle').click()" style="color:#fff;">Google Plus </a></div>
+											<button class="display-none" id="btnGoogle" name="provider" value="Google"></button>
+										</div>
+							
+
+						</div>
+</form>				<div class="col-md-12 text-center">
+					<p class="mt-md-4">Don't have an account? <a href="javsascript:;"span class="green" ng-click="OpenSignUpForm();">Signup</a></p>
+                    
+				</div>
+                <div class="col-md-12 text-center">
+                    <p class="mt-md-4"><a href="/Account/ForgotPassword">Forgot Password?</a></p>
+                    
+                    </div>
+
+		</div><!-- .modal-body -->
+	</div>
+</div>
+</div><!-- modal-container -->
+
+
+				
+        </script>
+
+    <script type="text/ng-template" id="Foodmandu_Signup">
+
+      <div class="container">
+    <div class="modal-action modal-action--cancel" data-ng-click="cancelEditing()">×</div>
+    <div class="modal-header">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="modal-title mb-2" id="modal-title">Signup for Foodmandu</h3>
+            </div>
+        </div>
+    </div><!-- .modal-header -->
+
+    <div class="modal-body signup__form-container mt-3" id="modal-body">
+<form action="/Account/Register" class="signup__form" method="post" name="signupform" returnUrl="/" role="form"><input name="__RequestVerificationToken" type="hidden" value="vwHVHVzoC05NNSdOeZao7OcKmRIpU-nlWpVP0cT8xz-hTOuGSHcGZN_RuwGetn29ly5ySqb7j2NBDRcFEaNgvesZFZ41" />            <div class="row">
+                <div class="form-group col-sm-6">
+                    <label class="small-title">First Name</label>
+                    <input type="text" ng-class="{'form-control error': (signupform.FirstName.$error.required&&signupform.FirstName.$touched)||signupform.$submitted, 'form-control': FirstName!=''}" name="FirstName" placeholder="Your Name" ng-model="FirstName" required="" />
+                    <div ng-show="signupform.$submitted || signupform.FirstName.$touched">
+                        <p class="red" ng-show="signupform.FirstName.$error.required">First name is required.</p>
+                    </div>
+                </div>
+                <div class="form-group col-sm-6">
+                    <label class="small-title">Last Name</label>
+                    <input type="text" ng-class="{'form-control error': (signupform.LastName.$error.required&&signupform.LastName.$touched)||signupform.$submitted, 'form-control': LastName!=''}" name="LastName" placeholder="Your Name" ng-model="LastName" required="" />
+                    <div ng-show="signupform.$submitted || signupform.LastName.$touched">
+                        <p class="red" ng-show="signupform.LastName.$error.required">Last name is required.</p>
+                    </div>
+                </div>
+
+                <div class="form-group col-sm-6">
+                    <label class="small-title">Email Address</label>
+                    <input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" ng-class="{'form-control error': (signupform.Email.$error.required&&signupform.Email.$touched)||signupform.$submitted, 'form-control': Email!=''}" name="Email" placeholder="you@yourname.com" ng-model="Email" required="" />
+                    <div ng-show="signupform.$submitted || signupform.Email.$touched">
+                        <p class="red" ng-show="signupform.Email.$error.required">Email  is required.</p>
+                    </div>
+
+                </div>
+                <div class="form-group col-sm-6">
+                    <label class="small-title">Mobile Number</label>
+                    <input type="text" name="PhoneNumber" ng-class="{'form-control error': (signupform.PhoneNumber.$error.required&&signupform.PhoneNumber.$touched)||signupform.$submitted, 'form-control': PhoneNumber!=''}" class="form-control" placeholder="98XXXXXXXX" minlength="10" maxlength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57' ng-model="PhoneNumber" required="" />
+                    <div ng-show="signupform.$submitted || signupform.PhoneNumber.$touched">
+                        <p class="red" ng-show="signupform.PhoneNumber.$error.required||PhoneNumber.length!=10">Valid Mobile Number  is required.</p>
+                    </div>
+                </div>
+
+                <div class="form-group col-sm-6">
+                    <label class="small-title">Choose a Password</label>
+                    <input type="password" name="Password" ng-class="{'form-control error': (signupform.Password.$error.required&&signupform.Password.$touched)||signupform.$submitted, 'form-control': Password!=''}" ng-model="Password" placeholder="" required="" />
+                    <div ng-show="signupform.$submitted || signupform.Password.$touched">
+                        <p class="red" ng-show="signupform.Password.$error.required">Password  is required.</p>
+
+                    </div>
+                </div>
+                <div class="form-group col-sm-6">
+                    <label class="small-title">Confirm Password</label>
+                    <input type="password" name="ConfirmPassword" ng-class="{'form-control error': (signupform.ConfirmPassword.$error.required&&signupform.ConfirmPassword.$touched)||signupform.$submitted, 'form-control': ConfirmPassword!=''}" ng-model="ConfirmPassword" placeholder="" required="" />
+                    <div ng-show="signupform.$submitted || signupform.ConfirmPassword.$touched">
+                        <p class="red" ng-show="signupform.ConfirmPassword.$error.required">Confirm password  is required.</p>
+
+                    </div>
+                    <p ng-show="Password!=ConfirmPassword&&signupform.ConfirmPassword.$dirty" class="red">No match!</p>
+
+                </div>
+                <div class="form-group col-sm-12">
+                    <!-- Insert captcha here -->
+                    <fm-Recaptcha></fm-Recaptcha>
+
+                    <label>
+                        
+                    </label>
+
+                </div>
+
+                <div class="col-sm-12">
+                    <label>
+                        By Signing Up, I agree to Foodmandu’s <a href="/Home/TermsAndPrivacy" title="Foodmandu Terms of Use">Terms of Use</a> and <a href="/Home/TermsAndPrivacy" title="Foodmandu Privacy Policy">Privacy Policy</a>.
+                    </label>
+                </div>
+
+                <div class="col-sm-12">
+                    <button type="submit" class="btn btn--primary btn-block" ng-disabled="signupform.$invalid||Password!=ConfirmPassword">Sign Up</button>
+                </div>
+            </div>
+            <hr>
+</form>
+<form action="/Account/ExternalLogin" id="externalLoginForm" method="post"><input name="__RequestVerificationToken" type="hidden" value="uM_dgWZmaPbJuNio9mNSyQemWaIRBt44tOlIN2YvoeKcZr4c-V1n3-ckLwNXJqQBwM9QRW6lrQntljOxmt_F_tluam41" />                <div class="signup__other-options row">
+                    <div class="col-md-12 text-center small-title mb-3 mt-3">Or Signup Using</div>
+                                <div class="col-6">
+                                    <div class="btn btn--facebook btn-block mb-3 mb-md-0"><a href="javascript:document.getElementById('btnFacebook').click()" style="color:#fff;">Facebook</a></div>
+                                    <button class="display-none" id="btnFacebook" name="provider" value="Facebook"></button>
+                                </div>
+                                <div class="col-6">
+                                    <div class="btn btn--googleplus btn-block mb-3 mb-md-0"><a href="javascript:document.getElementById('btnGoogle').click()" style="color:#fff;">Google Plus </a></div>
+                                    <button class="display-none" id="btnGoogle" name="provider" value="Google"></button>
+                                </div>
+                    
+                    <div class="col-md-12 text-center">
+                        <p class="mt-md-4">Already have an account? <a href="/Account/Login">Sign in</a></p>
+                    </div>
+                </div>
+</form>
+
+    </div>
+    <!-- .modal-body -->
+</div><!-- modal-container -->
+
+
+        </script>
+
+  </header>
+  <div class="masthead-space"></div>
+
+  <!-- You write code for this content block in another file -->
+
+
+
+  <div data-ng-controller="dashboardController">
+    <section class="banner banner--landing d-flex align-items-center parallax">
+
+      <div class="container parallax__front">
+
+        <div class="row">
+          <div class="col-md-9 col-lg-8 col-sm-9 mx-auto hero__container">
+
+            <h2 class="text-center col-md-12">Order food from the widest range of restaurants.</h2>
+            <div class="row">
+              <a href="/Views/Home/Index.cshtml"></a>
+              <div class="col-md-9 mx-auto mt-3 search search--hero no-padding-md input-group">
+
+                <input type="search" class="search form-control form-control-lg cta-search animate-bg" ng-enter="SearchBy()" ng-model="fm_filter.search_text" placeholder="Restaurant or Cuisine (leave it blank to browse all)">
+
+                <!--autosuggest temporarily disabled-->
+
+                <!--end autosuggest temporary disabled-->
+                <span class="icon-close red clearSearch" ng-show="fm_filter.search_text" ng-hide="!fm_filter.searchtext" ng-click="fm_filter.search_text=''"></span>
+
+
+              </div>
+
+              <div class="hidden-sm-down col-md-3 mt-3 no-padding-md">
+                <button class="btn btn--primary btn-lg btn-block" ng-click="SearchBy()" type="button">
+                  <span ng-show="fm_filter.search_type=='restaurant'">Find Restaurants</span>
+
+                </button>
+              </div>
+              <div class="text-center hidden-md-up col-sm-12 mt-3">
+                <button class="btn btn--primary btn-lg btn--landing-search" ng-click="SearchByVendor()" type="button">Find Restaurant</button>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="parallax__holder">
+        <img src="images/tandoori_chicken.png" class="food-item hidden-sm-down" alt="" style="top: 10%; left:5%;transform: scale(0.7);" data-origin="top: 10%; left:5%;transform: scale(0.7)" data-resize="top:9%;left:4%;transform: scale(0.8);">
+        <img src="images/flanksteak_cheddar.png" class="food-item hidden-xs-down" alt="" style="right: 5%; top:0%;" data-origin="right: 5%; top:0%;transform: scale(1);" data-resize="top:0%;right:4%;transform: scale(1.1);">
+        <img src="images/flanksteak_cheddar.png" class="food-item hidden-xs-down" alt="" style="left: 20%; bottom:5%;transform: scale(0.9);" data-origin="left: 20%; bottom:5%;transform: scale(0.9);" data-resize="left: 19%; bottom:4%;transform: scale(1);">
+        <img src="images/salmon.png" class="food-item hidden-md-down" alt="" style="bottom:-5%; right: 15%" data-origin="bottom:-5%; right: 15%;transform: scale(1);" data-resize="bottom:-5%;right:14%;transform: scale(1.1);">
+        <div class="food-item hidden-sm-up" style="bottom:-15%; display: block; width: 100%;text-align: center" data-origin="bottom:-15%; display: block; width: 100%; text-align:center ;transform: scale(1);" data-resize="bottom:-5%; display: block; width: 100%;text-align: center;transform: scale(1.1);">
+          <img src="images/salmon-plate.png" alt="" style="width: 80%;">
+        </div>
+      </div>
+    </section>
+
+
+
+
+
+
+    <section class="section">
+
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h3 class="small-title inline">FOODMANDU FRESH</h3>
+            <a href="https://foodmandu.com/Restaurant/Details/1205"><img src="images/Foodmandu-Fresh.jpg" style="width:100%;border:none;"></a>
+
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="border: 1px solid #E7E7E7;border-width: 1px 0 0 0;">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h2 class="small-title inline">FEATURED RESTAURANTS</h2>
+
+            <a href="/Restaurant/Index?q=&amp;c=FEATURED&amp;k=restaurant"><small class="float-right">View all <span class="icomoon icon-arrow-forward"></span></small></a>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="listing">
+              <div class="listing__photo" style="height:150px !important">
+                <a href="/Restaurant/Details/1027">
+                  <img src="images/Untitled_design_-_2024-06-10T160909_100624102433.920.png" style="width:100%;">
+                </a>
+              </div>
+              <div class="title20 mt-2">
+                <a href="/Restaurant/Details/1027"><span>4 Corners - Detroit Style Pizza</span></a>
+              </div>
+
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="listing">
+              <div class="listing__photo" style="height:150px !important">
+                <a href="/Restaurant/Details/269">
+                  <img src="images/web_240423103631_200624060757.listing-fire-and-ice.png" style="width:100%;">
+                </a>
+              </div>
+              <div class="title20 mt-2">
+                <a href="/Restaurant/Details/269"><span>Fire And Ice Pizzeria - Thamel</span></a>
+              </div>
+
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="listing">
+              <div class="listing__photo" style="height:150px !important">
+                <a href="/Restaurant/Details/326">
+                  <img src="images/Untitled_design_-_2024-06-11T112136_110624053658.455.png" style="width:100%;">
+                </a>
+              </div>
+              <div class="title20 mt-2">
+                <a href="/Restaurant/Details/326"><span>The Workshop Eatery - Bakhundole</span></a>
+              </div>
+
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="listing">
+              <div class="listing__photo" style="height:150px !important">
+                <a href="/Restaurant/Details/232">
+                  <img src="images/Untitled_design_-_2024-06-10T172330_100624113837.765.png" style="width:100%;">
+                </a>
+              </div>
+              <div class="title20 mt-2">
+                <a href="/Restaurant/Details/232"><span>Le Trio - Jhamsikhel</span></a>
+              </div>
+
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="listing">
+              <div class="listing__photo" style="height:150px !important">
+                <a href="/Restaurant/Details/289">
+                  <img src="images/4_151222081130_150424053129._burger-shack-web-listing.jpg" style="width:100%;">
+                </a>
+              </div>
+              <div class="title20 mt-2">
+                <a href="/Restaurant/Details/289"><span>Burger Shack - Jawalakhel</span></a>
+              </div>
+
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="listing">
+              <div class="listing__photo" style="height:150px !important">
+                <a href="/Restaurant/Details/978">
+                  <img src="images/Untitled_design_-_2024-06-10T152425_100624095135.059.png" style="width:100%;">
+                </a>
+              </div>
+              <div class="title20 mt-2">
+                <a href="/Restaurant/Details/978"><span>Koto Restaurant - Durbarmarg</span></a>
+              </div>
+
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="listing">
+              <div class="listing__photo" style="height:150px !important">
+                <a href="/Restaurant/Details/846">
+                  <img src="images/8_151222081509._ktm-marritot-web.listing.jpg" style="width:100%;">
+                </a>
+              </div>
+              <div class="title20 mt-2">
+                <a href="/Restaurant/Details/846"><span>Kathmandu Marriott</span></a>
+              </div>
+
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="listing">
+              <div class="listing__photo" style="height:150px !important">
+                <a href="/Restaurant/Details/844">
+                  <img src="images/4_151222081130_150424053157._burger-shack-web-listing.jpg" style="width:100%;">
+                </a>
+              </div>
+              <div class="title20 mt-2">
+                <a href="/Restaurant/Details/844"><span>Burger Shack - Kamaladi</span></a>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="border: 1px solid #E7E7E7;border-width: 1px 0 0 0;">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h2 class="small-title inline">SPECIAL DEALS</h2>
+
+
+
+            <a href="/Restaurant/Index?q=&amp;c=OFFERS&amp;k=restaurant"><small class="float-right">View all <span class="icomoon icon-arrow-forward"></span></small></a>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="listing">
+              <div class="listing__photo" style="height:150px !important">
+                <a href="/Restaurant/Details/1920">
+                  <img src="images/WebListing_%282%29_240524121514.jpg" style="width:100%;">
+                </a>
+              </div>
+              <div class="title20 mt-2">
+                <a href="/Restaurant/Details/1920"><span>Fusion Flavours</span></a>
+              </div>
+
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="listing">
+              <div class="listing__photo" style="height:150px !important">
+                <a href="/Restaurant/Details/1910">
+                  <img src="images/friendship_cafe_web_listing_240624055232.png" style="width:100%;">
+                </a>
+              </div>
+              <div class="title20 mt-2">
+                <a href="/Restaurant/Details/1910"><span>Friendship Cafe</span></a>
+              </div>
+
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="listing">
+              <div class="listing__photo" style="height:150px !important">
+                <a href="/Restaurant/Details/1921">
+                  <img src="images/WebListing_220524061427.png" style="width:100%;">
+                </a>
+              </div>
+              <div class="title20 mt-2">
+                <a href="/Restaurant/Details/1921"><span>Mom's Kitchen Restaurant</span></a>
+              </div>
+
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="listing">
+              <div class="listing__photo" style="height:150px !important">
+                <a href="/Restaurant/Details/188">
+                  <img src="images/Untitled_design_-_2024-06-10T155430_100624101002.692.png" style="width:100%;">
+                </a>
+              </div>
+              <div class="title20 mt-2">
+                <a href="/Restaurant/Details/188"><span>Bricks Cafe Firewood Pizza</span></a>
+              </div>
+
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="listing">
+              <div class="listing__photo" style="height:150px !important">
+                <a href="/Restaurant/Details/1741">
+                  <img src="images/web_listing_%282%29_150624091553.jpg" style="width:100%;">
+                </a>
+              </div>
+              <div class="title20 mt-2">
+                <a href="/Restaurant/Details/1741"><span>Yasumi Japanese Restaurant</span></a>
+              </div>
+
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="listing">
+              <div class="listing__photo" style="height:150px !important">
+                <a href="/Restaurant/Details/1452">
+                  <img src="images/web_050822063015.listing-newari-kitchen.jpg" style="width:100%;">
+                </a>
+              </div>
+              <div class="title20 mt-2">
+                <a href="/Restaurant/Details/1452"><span>Newari Kitchen</span></a>
+              </div>
+
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="listing">
+              <div class="listing__photo" style="height:150px !important">
+                <a href="/Restaurant/Details/1894">
+                  <img src="images/Untitled_design_-_2024-06-11T175328_110624120946.449.png" style="width:100%;">
+                </a>
+              </div>
+              <div class="title20 mt-2">
+                <a href="/Restaurant/Details/1894"><span>Valley Xpress - Bharatpur</span></a>
+              </div>
+
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="listing">
+              <div class="listing__photo" style="height:150px !important">
+                <a href="/Restaurant/Details/1796">
+                  <img src="images/Untitled_design_-_2024-06-25T120917_250624062442.054.png" style="width:100%;">
+                </a>
+              </div>
+              <div class="title20 mt-2">
+                <a href="/Restaurant/Details/1796"><span>Izakaya Hokkaido</span></a>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+    <section class="section section--testimonial">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row">
+
+          <div class="col-md-2"></div>
+          <div class="col-md-8 text-center">
+            <h3 class="text-white text-center">About Us</h3>
+            <p class="text-white text-center">
+              Foodmandu is the fastest, easiest and most convenient way to enjoy the best food of your favourite restaurants at home, at the office or wherever you want to.
+            </p>
+            <p class="text-white text-center">
+              We know that your time is valuable and sometimes every minute in the day counts.
+              That’s why we deliver! So you can spend more time doing the things you love.
+            </p>
+            <button class="btn btn-outline"><a href="/Home/About"> LEARN MORE</a></button>
+          </div>
+          <div class="col-md-2"></div>
+
+
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--download-app" style="border:1px solid #E7E7E7;
+             border-width:1px 0 1px 0;">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 d-flex align-items-center">
+            <div>
+              <h1 class="red"><b>Download the app</b></h1>
+              <p>Always on the go.</p>
+              <p> Food - whenever and wherever you want it!</p>
+              <a href="https://itunes.apple.com/np/app/foodmandu/id983591001"><img src="images/itunes-app-store-logo.png" alt="" class="download-logo"></a>
+              <a href="https://play.google.com/store/apps/details?id=com.app.foodmandu"><img src="images/google-play-store-logo.png" alt="" class="download-logo"></a>
+            </div>
+          </div>
+          <div class="col-md-5 img-container">
+            <img src="images/download_app_frame.png" alt="download">
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="section" style="background-color:#F7F7F7;">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3">�&nbsp;</div>
+          <div class="col-md-6">
+            <div class="text-center" style="text-align:justify;">
+
+              <h2 style="text-align:center;">
+                <b>
+                  List your Restaurant at Foodmandu!<br> Reach 2,00,000 + new customers.
+                </b>
+              </h2>
+            </div>
+            <br>
+            <div class="text-center">
+              <button class="btn btn--primary text-center" ng-click="OpenEnquiryForm()">Send a request</button>
+            </div>
+          </div>
+          <div class="col-md-12 col-lg-2 mt-2">
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+  </div>
+
+
+
+
+
+  <script type="text/ng-template" id="customPopupTemplate.html">
+    <div class="custom-popup-wrapper"
+		 ng-style="{top: position().top+'px', left: position().left+'px'}"
+		 style="display: block;"
+		 ng-show="isOpen() && !moveInProgress"
+		 aria-hidden="{{!isOpen()}}">
+		<p class="message">select location from drop down.</p>
+
+		<ul class="dropdown-menu" role="listbox">
+			<li class="uib-typeahead-match" ng-repeat="match in matches track by $index" ng-class="{active: isActive($index) }"
+				ng-mouseenter="selectActive($index)" ng-click="selectMatch($index)" role="option" id="{{::match.id}}">
+				<div uib-typeahead-match index="$index" match="match" query="query" template-url="templateUrl"></div>
+			</li>
+		</ul>
+	</div>
+</script>
+
+  <script type="text/ng-template" id="EnquiryForm">
+
+    <div class="container">
+    <div class="modal-action modal-action--cancel" data-ng-click="cancelEditing()">×</div>
+    <div class="modal-header">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="modal-title mb-2" id="modal-title">Get listed in Foodmandu</h3>
+                <p>Please fill up your details.</p>				
+            </div>
+        </div>
+    </div><!-- .modal-header -->
+
+    <div class="modal-body signup__form-container mt-3" id="modal-body">
+        <div class="page-notifications page-notifications--success" ng-show="showMessage">
+            <p class="green">Your details have been sent. We will contact you soon.</p>
+        </div>
+        <form name="enquiryform">            
+            <div class="row spinner">
+                <div class="form-group col-sm-6">
+                    <label class="small-title">Your Name <span style="color:red;" title="Your name is required">*</span></label>
+                    <input type="text" ng-class="{'form-control error': (enquiryform.ContactPerson.$error.required&&enquiryform.ContactPerson.$touched), 'form-control': ContactPerson!=''}" name="ContactPerson" placeholder="Your Name" ng-model="enquiry.ContactPerson" required="" />
+                    <div ng-show="enquiryform.$submitted || enquiryform.ContactPerson.$touched">
+                        <p class="red" ng-show="enquiryform.ContactPerson.$error.required">Your name is required.</p>
+                    </div>
+                </div>
+				<div class="form-group col-sm-6">
+					<label class="small-title">Restaurant/Store Name <span style="color:red;" title="Restaurant Name  is required">*</span></label>
+					<input type="text" ng-class="{'form-control error': (enquiryform.RestaurantName.$error.required&&enquiryform.RestaurantName.$touched), 'form-control': RestaurantName!=''}" name="RestaurantName" placeholder="your restaurant/store name" ng-model="enquiry.RestaurantName" required="" />
+					<div ng-show="enquiryform.$submitted || enquiryform.RestaurantName.$touched">
+						<p class="red" ng-show="enquiryform.RestaurantName.$error.required">Restaurant Name  is required.</p>
+					</div>
+				</div>  
+                <div class="form-group col-sm-6">
+                    <label class="small-title">Email Address <span style="color:red;" title="Email  is required">*</span></label>
+                    <input type="email" ng-class="{'form-control error': (enquiryform.ContactEmail.$error.required&&enquiryform.ContactEmail.$touched), 'form-control': ContactEmail!=''}" name="ContactEmail" placeholder="you@yourname" ng-model="enquiry.ContactEmail" required="" />
+                    <div ng-show="enquiryform.$submitted || enquiryform.ContactEmail.$touched">
+                        <p class="red" ng-show="enquiryform.ContactEmail.$error.required">Email  is required.</p>
+                    </div>
+                </div>   
+				<div class="form-group col-sm-6">
+					<label class="small-title">Contact Number <span style="color:red;" title="Contact number  is required">*</span></label>					
+					<input type="text" ng-class="{'form-control error': (enquiryform.ContactNumber.$error.required&&enquiryform.ContactNumber.$touched), 'form-control': ContactNumber!=''}" name="ContactNumber" placeholder="98xxxxxxxx" ng-model="enquiry.ContactNumber" minlength="10" maxlength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57' required="" />
+					<div ng-show="enquiryform.$submitted || enquiryform.ContactNumber.$touched">
+						<p class="red" ng-show="enquiryform.ContactNumber.$error.required">Contact number  is required.</p>
+					</div>
+				</div> 
+				            
+                <div class="form-group col-sm-12">
+                    <label class="small-title">Details <span style="color:red;" title="Details  is required">*</span></label>
+                    <textarea type="text" rows="7" name="MessageText" ng-class="{'form-control error': (enquiryform.MessageText.$error.required&&enquiryform.MessageText.$touched), 'form-control': MessageText!=''}" ng-model="enquiry.MessageText"  placeholder="Your details here" required=""></textarea>
+                    <div ng-show="enquiryform.$submitted || enquiryform.MessageText.$touched">
+                        <p class="red" ng-show="enquiryform.MessageText.$error.required">Details  is required.</p>
+                    </div>
+                </div>
+
+                <div class="col-sm-12">
+                    <button type="submit" class="btn btn--primary btn-block" ng-click="SaveEnquiry()" ng-disabled="enquiryform.$invalid">Send Message</button>
+                </div>
+                <div class="spinner__loader" ng-show="loading">
+                    <div class="spinner__circle"></div>
+                </div>
+            </div>
+        </form>
+       
+
+    </div>
+    <!-- .modal-body -->
+</div><!-- modal-container -->
+
+</script>
+
+  <!-- section end -->
+
+
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 footer__menu">
+          <ul class="list-unstyled">
+            <li>
+              <h3 class="small-title">We're Foodmandu</h3>
+            </li>
+            <li><a href="/Home/About">About Us</a></li>
+            <li><a href="/Home/AvailableAreas">Available Areas</a></li>
+            <li><a href="/Home/DeliveryCharge">Delivery Charges</a></li>
+            <li><a href="https://blog.foodmandu.com/" target="_blank">Blog</a></li>
+          </ul>
+          <p>
+
+            <br>
+          </p>
+          <h3 class="small-title">Service Hour</h3>
+          <span style="font-size:80%">08:00 AM to 9:00 PM (NST)</span>
+
+          <p></p>
+        </div>
+
+        <div class="col-md-2 footer__menu" ng-controller="OldVersionController">
+          <ul class="list-unstyled">
+            <li>
+              <h3 class="small-title">Get Help</h3>
+            </li>
+            <li><a href="/Home/HowToOrder">How to Order?</a></li>
+            <li><a href="/Home/Faqs">FAQs</a></li>
+            <li><a href="/Home/Contact">Contact Us</a></li>
+          </ul>
+
+
+        </div>
+
+        <div class="col-md-3 footer__menu footer__menu--info">
+          <ul class="list-unstyled">
+            <li>
+              <h3 class="small-title">Call us</h3>
+            </li>
+            <li>Kathmandu: 5970477, 4544177, 4540979, 9802034008</li>
+            <li>
+              <h3 class="small-title">Call us</h3>
+            </li>
+            <li>Pokhara: 9802859990, 9802853330 </li>
+          </ul>
+        </div>
+
+        <div class="col-md-4 footer__menu footer__menu--download">
+          <h3 class="small-title block">Download App</h3>
+          <a href="https://itunes.apple.com/np/app/foodmandu/id983591001"><img src="images/itunes-app-store-logo.png" alt="" class="download-logo"></a>
+          <a href="https://play.google.com/store/apps/details?id=com.app.foodmandu"><img src="images/google-play-store-logo.png" alt="" class="download-logo"></a>
+          <div class="mt-2">
+            <h3 class="small-title">Connect with Us</h3>
+            <br>
+            <a href="https://www.facebook.com/foodmandu" target="_blank" title="Facebook"><span class="icomoon icon-facebook social-logo"></span></a>
+            <a href="https://twitter.com/foodmandu" target="_blank" title="Twitter"><span class="icomoon icon-twitter social-logo"></span></a>
+            <a href="https://www.instagram.com/foodmandu/" target="_blank" title="instagram"><span class="icomoon icon-instagram2 social-logo"></span></a>
+            <a href="https://blog.foodmandu.com/" target="_blank" title="blog"><span style="font-size:150%; margin: 0px 2px;" class="icomoon icon-blogger social-logo"></span></a>
+            <a href="https://www.youtube.com/channel/UCDf_rtJmXYSC08spCjoGDlQ" target="_blank" title="Youtube"><span class="icomoon icon-youtube social-logo"></span></a>
+
+          </div>
+        </div>
+
+        <div class="col-md-12 footer__tnc">
+          <hr>
+          <ul class="list-inline">
+            <li class="list-inline-item"><a href="/Home/TermsOfUse">Terms of Usage</a></li> |
+            <li class="list-inline-item"><a href="/Home/PrivacyPolicy"> Privacy Policy</a></li>
+            <li class="list-inline-item float-md-right">© 2020 Foodmandu Pvt. Ltd. All Rights Reserved.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <a href="javascript:" id="return-to-top"><span class="icomoon icon-arrow-forward"></span></a>
+
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+
+  <script src="js/angular.js"></script>
+  <script src="js/angular-animate.js"></script>
+  <script src="js/angular-sanitize.js"></script>
+  <script src="js/ui-bootstrap-tpls-2.5.0.js"></script>
+  <script src="js/ngStorage.min.js"></script>
+  <script type="text/javascript" src="js/angular-sticky-box.min.js"></script>
+  <!--
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+    <script type="text/javascript" src="js/bootstrap.min.js"></script> -->
+
+  <script src="js/app.js"></script>
+  <script type="text/javascript">
+    var serviceBase = "https://foodmandu.com/webapi/";
+    var baseUrl = "https://foodmandu.com/";
+    var showhomepopup = "True";
+    var showcheckoutpopup = "True";
+
+    var currentDevice = "";
+
+    function GETJ(str, isobj) {
+
+      var json = isobj ? {} : [];
+      try {
+        var stringToJ = str.replace(/\n|\r|\t/g, "");
+        json = angular.fromJson(stringToJ);
+      } catch (e) {
+        console.log("Errorin JSON: " + stringToJ);
+        return isobj ? {} : [];
+      }
+      return json;
+    };
+  </script>
+  <script type="text/ng-template" id="customTemplate.html">
+
+    <a role="menu">
+
+            <span ng-bind-html="match.label | uibTypeaheadHighlight:query"></span>
+        </a>
+    </script>
+  <script type="text/ng-template" id="ShowSmallOrderFee">
+    <section class="hero banner banner--general">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="">Small Order Fee</h1>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section">
+    <div class="container">
+
+
+        <p>
+            <strong>Your Tastes, Your Terms.</strong><br /><br />
+
+            For orders below Rs. 500, a nominal convenience fee of just Rs. 50 allows you to enjoy your favorites with ultimate flexibility, eliminating the need to worry about a minimum order amount requirement. <br /><br/> Thank you for choosing Foodmandu!
+
+        </p>
+
+
+    </div>
+</section>
+    </script>
+
+  <script type="text/ng-template" id="customModalPopup">
+    <div class="modal-header">
+	<h3 ng-bind-html="modalOptions.headerText"></h3>
+</div>
+<div class="modal-body">
+	
+	<div ng-bind-html="modalOptions.bodyText"></div>
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn"  ng-hide="modalOptions.HideClose"
+			data-ng-click="modalOptions.close()">
+		{{modalOptions.closeButtonText}}
+	</button>
+	<button class="btn btn-primary" ng-hide="modalOptions.HideOK"
+			data-ng-click="modalOptions.ok();">
+		{{modalOptions.actionButtonText}}
+	</button>
+</div>
+
+    </script>
+
+  <script type="text/ng-template" id="ShowMobileWindow">
+    <div class="bg-success">
+	<a href="javascript:;"data-ng-click="cancelEditing()" style="float:right;"><i class="glyphicon icon-close"></i></a>
+	<br />
+    <div class="text-center">
+        <span style="color:white; font-size:10px;">
+            Download our App for better user experience 
+        </span>        
+        <span style="float:right">
+            <a href="https://v1g3.app.link/RvLsIG4rwF">
+                <label class="btn btn--hollow" style="background-color:white;">
+                    Get It
+                </label>
+            </a>
+        </span>
+    </div>
+</div><!-- modal-container -->
+    </script>
+
+  <script type="text/ng-template" id="ShowPrevBrowserMsg">
+    <div class="container">
+	<div class="modal-action modal-action--cancel" data-ng-click="cancelEditing()">×</div>
+	<div class="modal-header">
+		<div class="row">
+			<div class="col-md-12">
+				<h3 class="modal-title mb-2" id="modal-title">Welcome to Foodmandu!</h3>
+			</div>
+		</div>
+	</div><!-- .modal-header -->
+
+	<div class="modal-body signup__form-container mt-3" id="modal-body">
+		<section class="section section--download-app">
+			<div class="container">
+				<div class="row">
+					<div class="col-12 d-flex align-items-center justify-content-center">
+						<div class="text-center">
+							<p>Blah! blah! blah! find link below</p>
+							
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</section>
+	</div><!-- .modal-body -->
+</div><!-- modal-container -->
+    </script>
+  <script type="text/ng-template" id="ReviewForm">
+
+    <div class="container">
+    <div class="modal-action modal-action--cancel" data-ng-click="cancelEditing()">×</div>
+    <div class="modal-header">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="modal-title mb-2" id="modal-title">You are about to leave current website and return to previous version.</h3>
+				<p style="font-size:12px;">Please note that your login session and shopping cart items may not be retained.</p>
+				<p style="font-size:12px;">Would you like to drop some feedback?</p>
+
+            </div>
+        </div>
+	
+    </div><!-- .modal-header -->
+
+    <div class="modal-body signup__form-container mt-3" id="modal-body">
+		<div class="page-notifications page-notifications--success" ng-show="showMessage">
+			<p class="green">Thank you for your valuable feedback.</p>
+		</div>
+       
+            <form name="reviewform">
+                <fieldset ng-disabled="loading">
+                    <div class="row spinner">
+                        <div class="form-group col-sm-12">
+                            <label class="small-title">Your Email</label>
+                            <input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" ng-class="{'form-control error': (reviewform.UserEmail.$error.required&&reviewform.UserEmail.$touched), 'form-control': UserEmail!=''}" required name="UserEmail" placeholder="Your Email" ng-model="review.UserEmail" />
+                            <div ng-show="reviewform.$submitted || reviewform.UserEmail.$touched">
+                                <p class="red" ng-show="reviewform.UserEmail.$error.required">Your email is required.</p>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-12">
+                            <label class="small-title">Feedback/Suggestion</label>
+                            <textarea rows="5" name="MessageText" ng-class="{'form-control error': (reviewform.MessageText.$error.required&&reviewform.MessageText.$touched), 'form-control': UserReviewText!=''}" required="" ng-model="review.UserReviewText" placeholder="Your feedback here"></textarea>
+                            <div ng-show="reviewform.$submitted || reviewform.MessageText.$touched">
+                                <p class="red" ng-show="reviewform.MessageText.$error.required">Please insert your feedback.</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <button type="submit" class="btn btn--primary btn-block" ng-click="SaveFeedback()" ng-disabled="reviewform.$invalid">Send feedback and take me to old website</button>
+
+                        </div>
+                        <div class="spinner__loader" ng-show="loading">
+                            <div class="spinner__circle"></div>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+         </div>
+	
+    <!-- .modal-body -->
+</div><!-- modal-container -->
+
+    </script>
+  <script type="text/ng-template" id="ShowEstimateDel">
+
+    <section class="hero banner banner--general">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="">Delivery Charges</h1>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section">
+    <div class="container">
+        <strong>Foodmandu Fresh Orders:</strong> <br /> Rs. 100 per order<br /><br />
+        <p>
+            <strong>Restaurants and other stores</strong><br />
+            The delivery charge is calculated based on the restaurant bill total and the <strong>approximate road distance</strong> between the selected restaurant and the delivery location.
+            <ul>
+                <li>Up to 1 Km: Rs. 20</li>
+                <li>After 1 Km: Additional Rs. 20/km</li>
+            </ul>
+        </p>
+
+        
+    </div>
+</section>
+    </script>
+
+
+
+
+  <script type="text/javascript" src="js/owlcarousel.js"></script>
+  <script type="text/javascript" src="js/dashbaordController.js"></script>
+
+
+  <script>
+    //Show Hide Search Filter
+    var is_index = true;
+
+
+    $(document).ready(function() {
+      //setTimeout(function () { $('.dropme').slideUp(); }, 3000);
+
+      var newstyle;
+      var originstyle;
+      $(".animate-bg").focus(function() {
+        $(".food-item").each(function() {
+          newstyle = $(this).data("resize");
+          $(this).attr('style', newstyle);
+          $(".home_hero").attr('style', 'background-size: 180px');
+        });
+      }).blur(function() {
+        $(".food-item").each(function() {
+          originstyle = $(this).data("origin");
+          $(this).attr('style', originstyle);
+          $(".home_hero").attr('style', 'background-size: 200px');
+        });
+      });
+
+      $('#menucarousel').owlCarousel({
+        loop: true,
+        autoplay: false,
+        dots: false,
+        dotsEach: 6,
+        autoplayTimeout: 2500,
+        responsiveClass: true,
+        responsive: {
+          0: {
+            items: 3
+          },
+          600: {
+            items: 6
+          },
+          1000: {
+            items: 8
+          }
+        }
+      });
+    });
+
+    $("#ShowAllLink").click(function() {
+
+      $(".RemainingItems").css("display", "block");
+      $("#ShowAllLink").css("display", "none");
+    })
+
+    $("#ShowAllLink_HL").click(function() {
+
+      $(".RemainingItems_HL").css("display", "block");
+      $("#ShowAllLink_HL").css("display", "none");
+    })
+
+    $("#ShowAllLink_BKT").click(function() {
+
+      $(".RemainingItems_BKT").css("display", "block");
+      $("#ShowAllLink_BKT").css("display", "none");
+    })
+
+
+    $("#btn_show").click(function() {
+      $(".subscribe-body").fadeIn("slow");
+      $("#btn_show").hide();
+    });
+
+    $("#btn_hide").click(function() {
+      $(".subscribe-body").fadeOut("slow");
+      $("#btn_show").fadeIn("slow");
+    });
+  </script>
+
+
+  <script src="js/ng-map.js"></script>
+  <script src="js/ProductController.js"></script>
+
+
+  <script src="js/checkMobileBrowser.min.js"></script>
+  <script src="js/angular-filter.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/javascript">
+    ;
+    (function() {
+      'use strict';
+      app.controller('mobilePopupController', ['$scope', function($scope) {
+        $scope.showMobilePopup = false;
+
+        if (typeof(isMobile) != 'undefined') {
+          if (isMobile) {
+            $scope.showMobilePopup = true;
+          }
+        };
+
+            }]);
+    }());
+  </script>
+  <script src="js/OldVersionController.js"></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>
